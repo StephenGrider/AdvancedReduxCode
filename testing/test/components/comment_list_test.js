@@ -5,7 +5,7 @@ describe('CommentList', () => {
   let component;
 
   beforeEach(() => {
-    const props = { comments: ['New Comment', 'Other New Comment'] };
+    const props = { commenti: ['New Comment', 'Other New Comment'] }; // it uses the real state 'commenti' and not the prorp from mapStateToProps of the component rendered
     component = renderComponent(CommentList, null, props);
   });
 

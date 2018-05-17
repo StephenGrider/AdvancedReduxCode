@@ -1,3 +1,4 @@
 .error {
   color: red;
 }
+.captext { text-transform: capitalize;}

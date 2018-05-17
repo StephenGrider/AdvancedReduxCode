@@ -8,7 +8,7 @@ export default class App extends Component {
     return (
       <div>
         <Header />
-        {this.props.children}
+        {this.props.children} {/* has child routes to show*/}
       </div>
     );
   }

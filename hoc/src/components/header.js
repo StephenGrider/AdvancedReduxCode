@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class Header extends Component {
-  authButton() {
+  authButton() { // uses a function to return the right piece of component
     if (this.props.authenticated) {
       return <button onClick={() => this.props.authenticate(false)}>Sign Out</button>;
     }

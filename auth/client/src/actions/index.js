@@ -13,15 +13,7 @@ export function signinUser({ email, password }) {
   return function(dispatch) {
     // Submit email/password to the server
     axios.post(`${ROOT_URL}/signin`, { email, password })
-      .then(response => {
-        // If request is good...
-        // - Update state to indicate user is authenticated
-        dispatch({ type: AUTH_USER });
-        // - Save the JWT token
-        localStorage.setItem('token', response.data.token);
-        // - redirect to the route '/feature'
-        browserHistory.push('/feature');
-      })
+      .then(response => authUser(dispatch, response))
       .catch(() => {
         // If request is bad...
         // - Show an error to the user
@@ -33,16 +25,24 @@ export function signinUser({ email, password }) {
 export function signupUser({ email, password }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/signup`, { email, password })
-      .then(response => {
-        dispatch({ type: AUTH_USER });
-        localStorage.setItem('token', response.data.token);
-        browserHistory.push('/feature');
-      })
+      .then(response => authUser(dispatch, response))
       .catch(response => dispatch(authError(response.data.error)));
   }
 }
 
-export function authError(error) {
+
+//refactoring actions optimization, external from (signinUser e signupUser)
+export function authUser(dispatch, response) {
+    // If request is good...
+    // - Update state to indicate user is authenticated
+    dispatch({ type: AUTH_USER });
+    // - Save the JWT token
+    localStorage.setItem('token', response.data.token); // localStorage is a Web API (DOM) we just set a name and pass the token 
+    // - redirect to the route '/feature'
+    browserHistory.push('/feature');
+}
+
+export function authError(error) { //this action is external from (signinUser e signupUser) coz it's easier to share with these 2 (so no repeat)
   return {
     type: AUTH_ERROR,
     payload: error

@@ -15,7 +15,7 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <Route path="resources" component={requireAuth(Resources)} />
+        <Route path="resources" component={requireAuth(Resources)} /> {/* this is a nested route so the component will show just for the child route [and requireAuth is the HOC we created that augments the 'Resources' component ] */}
       </Route>
     </Router>
   </Provider>

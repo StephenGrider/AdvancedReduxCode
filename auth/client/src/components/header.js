@@ -11,7 +11,7 @@ class Header extends Component {
       </li>
     } else {
       // show a link to sign in or sign up
-      return [
+      return [ // returns an array of li (so don't have err without div, rendering multiple items at the same level)
         <li className="nav-item" key={1}>
           <Link className="nav-link" to="/signin">Sign In</Link>
         </li>,
